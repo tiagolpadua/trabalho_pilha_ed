@@ -1,18 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gov.unb.cic.ed.trabalhopilhaed;
 
-/**
- *
- * @author Tiago
- */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmPrincipal
-     */
     public FrmPrincipal() {
         initComponents();
     }
@@ -119,6 +108,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new FrmPrincipal().setVisible(true);
             }
