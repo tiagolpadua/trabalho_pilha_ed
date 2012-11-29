@@ -4,4 +4,9 @@
 *.jar
 *.war
 *.ear
+
+# Latex Files #
+*.aux
+*.log
+*.out
 /target/

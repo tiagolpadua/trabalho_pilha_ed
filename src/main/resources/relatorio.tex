@@ -1,0 +1,136 @@
+\documentclass[a4paper,11pt]{article}
+%LaTeX Model for Lab reports
+%Tested and used in Mac OS X with MacTEX
+%Felipe Brandão Cavalcanti - LARA, UnB, Brasília, Brazil
+
+%Packages
+\usepackage[brazilian]{babel} %Brazilian Portuguese
+\usepackage[T1]{fontenc}
+\usepackage{subfig}
+\usepackage[utf8]{inputenc}
+\usepackage{url} %URLs
+\usepackage{makeidx} %Index
+\usepackage[pdftex]{graphicx} %Graphics
+\usepackage{amsfonts} %Math fonts
+%\usepackage{indentfirst} %Makes it indent the first paragraph of the section
+\usepackage{listings} %Code support, properly highlighted
+\usepackage{verbatim} %Better verbatim
+%\usepackage{fancyvrb} %Fancy verbatim
+\usepackage{cite} %Better citation
+%\usepackage{siunitx} %SI Units 
+\usepackage{hyperref} %Makes links to your references, making your life quite a bit easier.
+%\usepackage[pdftex]{colortbl} %Color Tables
+\usepackage{array} %Better tables - improves the algorythms
+\hypersetup{ %Sets up hyperref
+    %bookmarks=true,         % show bookmarks bar?
+    %unicode=false,          % non-Latin characters in Acrobat?s bookmarks
+    %pdftoolbar=true,        % show Acrobat?s toolbar?
+    %pdfmenubar=true,        % show Acrobat?s menu?
+    %pdffitwindow=false,     % window fit to page when opened
+    %pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Relatório},    % title
+    %pdfauthor={Felipe Brandão Cavalcanti},     % author
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\lstset{ %Sets up lisitings, so we get highlighted code
+language=C,                     % choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=2,                   % the step between two line-numbers. If it's 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,	                % adds a frame around the code
+tabsize=2,	                    % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)}          % if you want to add a comment within your code
+}
+
+
+\parindent15pt  \parskip0pt
+\setlength\voffset{-2.0cm}
+\setlength\hoffset{-1.5cm}
+\setlength\textwidth{16.0cm}
+\setlength\textheight{24.5cm}
+\setlength\baselineskip{2cm}
+\renewcommand{\baselinestretch}{1.2}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+ 
+% Upper part of the page
+\includegraphics[width=0.25\textwidth]{./unb.pdf}\\[1cm]
+ 
+\textsc{\LARGE Universidade de Brasília}\\[1.5cm]
+ 
+\textsc{\Large Circuitos Elétricos 2 - Prof. Ícaro dos Santos}\\[0.5cm]
+ 
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Fator de Potência no Brasil}
+\HRule
+\vspace{0.75cm}
+\large Faculdade de Tecnologia\\Departamento de Engenharia Elétrica \\
+\vspace{0.8cm}
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autor:}\\
+Felipe Brandão Cavalcanti\\
+08/29111
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Orientador:} \\
+Geovany Araújo Borges
+\end{flushright}
+\end{minipage}
+ 
+\vfill
+ 
+% Bottom of the page
+{\large Agosto de 2008 - Julho de 2009}
+\end{center}
+\end{titlepage}
+
+\pagestyle{plain}
+
+\begin{abstract}
+\( x^2 + y^2 = 1 \) This document focuses on the set-up and basic use of the circuit\_macros package by J. D. Aplevich, enabling the users to embed high-quality circuits into their \LaTeX\ documents. More specifically, this note focuses in the setup in the Mac OS X system, which has became very popular among engineering students in the last few years.
+\end{abstract}
+
+\section{Introduction} 
+For many of us, \LaTeX\ is the holy grail of document production - not only does it make our lives easier, it also makes it possible to produce very high quality documents without much effort.
+
+Yet, \LaTeX\ still has some gaps to fill in - for professionals and students in the field of Electrical Engineering, the necessity of circuit representation has been long filled either with unprofessional and improvised solutions, such as using CAD software to produce the desired representation of the circuit, or reling in proprietary (and often expensive) software to do the same in a rather professional matter.
+
+Circuit\_macros basically fills the gap. It gives you all of the benefits (and drawbacks) of \LaTeX\ for circuit representation. Some very professional results can be obtained with a little bit of practice, and combined with the power of \LaTeX\, it can very well be the ultimate solution for electrical engineers looking to produce very high quality documents. More info can be found in J. D. Aplevich's (the creator and maintainer of circuit\_macros), \url{http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/}.
+
+The idea of this document is to setup the circuit\_macros in the Mac OS X operational system, which is becoming increasingly popular among college students and professionals alike. We assume the basic \LaTeX\ system has been setup, if not, check out the MacTeX distribution (\url{http://www.tug.org/mactex/}). MacTeX is probably the most user-friendly way of getting \LaTeX\ up and running in your mac. This document was written with Mac OS X 10.5 in mind, with circuit\_macros 6.5 and MacTex installed - however, it shouldn't differ much from other configurations.
+
+\section{Installation}
+\subsection{Getting the latest Circuit\_macros package}
+The first step is to grab the latest version of Circuit\_macros. In this example, we will be using version 6.5.
+
+The latest version of the circuit\_macros package can be found in the \TeX\ Users Group home page, \url{http://www.tug.org/}, more specifically, at \url{http://www.ctan.org/tex-archive/graphics/circuit_macros/}. You can also grab it directly from the author's website, \url{http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/}. However, keep in mind the the \TeX Users Group homepage should always have the latest official stable version. While you are at it, you might want to grab \verb+dpic+ as well - it can be found in the author's website as well.
+
+Once you had the files downloaded, go ahead and unzip them (if the OS hasn't done that already for you). We unzipped our example in the Downloads folder.
+
+\subsection{dpic's installation}
+The installation of circuit\_macros involves quite a bit of command line (terminal), however, most \LaTeX\ users shouldn't have much trouble with it. Also keep in mind that, at least for this tutorial, we have chosen to keep a command line approach, so every time you will need to use to command line to integrate generate the file to be included in your \LaTeX\ document.
+
+Our first step is to install \verb+dpic+, which is one of the necessary programs for circuit\_macros. For information on it, check out documentation on both \verb+dpic+ and circuit\_macros.
+\end{document}
