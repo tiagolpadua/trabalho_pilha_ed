@@ -5,10 +5,13 @@ public class Elemento {
     private Object valor;
     private Elemento proximo;
     
+    public Elemento() {        
+    }
+    
     public Elemento(Object valor, Elemento proximo){
         this.valor = valor;
         this.proximo = proximo;
-    }
+    }    
 
     public Object getValor() {
         return valor;

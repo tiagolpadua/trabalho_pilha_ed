@@ -2,38 +2,48 @@ package gov.unb.cic.ed.trabalhopilhaed;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ProcessadorException {
+//        String s = "1+3+65*(3*5)";
+//        Pattern pattern = Pattern.compile("[0-9]+|.");
+//        Matcher matcher = pattern.matcher(s);
+//        while (matcher.find()) {
+//          System.out.println("M:" + matcher.group());
+//        }
+//        
+//        System.out.println("spliting");
+////        String[] arr = s.split("[0-9]+|.");
+//        String[] arr = pattern.split(s);
+//        for(int i=0;i<arr.length;i++){
+//            System.out.println("id: "+i+" - "+arr[i]);
+//        }
 
-        String[] expressao = processar("(56+67))");
-
-        System.out.println("Expressão equilibrada: " + isParentesesEquilibrados(expressao));
-    }
-
-    public static boolean isParentesesEquilibrados(String[] expressao) {
-        Pilha p = new Pilha();
-        for (int i = 0; i < expressao.length; i++) {
-            if (expressao[i].equals("(")) {
-                p.inserir("(");
-            }
-
-            if (expressao[i].equals(")")) {
-                try{
-                    p.remover();
-                }catch(PilhaVaziaException ex){
-                    return false;
-                }
-            }
-
-        }
+        ExpressaoAritmetica e = new ExpressaoAritmetica();
+        //e.setExpressao("1*2+3-(4/5+6)");
+        e.setExpressao("A*B+C-(D/E+F)");
+//        e.setExpressao("1*2+3-4");
+//        for (String s : e.getParenteses()) {
+//            System.out.println("s: " + s);
+//        }
+//
+//        for (String v : e.getVetor()) {
+//            System.out.println("v: " + v);
+//        }
         
-        return p.isVazio();
-    }
+        System.out.println("posfixa:["+e.getPosfixa(true)+"]");
 
-    public static String[] processar(String expressao) {
-        String[] resposta = new String[expressao.length()];
-        for (int i = 0; i < expressao.length(); i++) {
-            resposta[i] = expressao.substring(i, i + 1);
-        }
-        return resposta;
+
+
+//        ExpressaoAritmetica e = new ExpressaoAritmetica();
+//        e.setExpressao("123+()/");
+//        System.out.println(e.getExpressao()+ " "+e.isExpressaoValida());
+//        
+//        e.setExpressao("123+");
+//        System.out.println(e.getExpressao()+ " "+e.isExpressaoValida());
+//        
+//        e.setExpressao("123+()/");
+//        System.out.println(e.getExpressao()+ " "+e.isExpressaoValida());
+//        
+//        e.setExpressao("123+()/");
+//        System.out.println(e.getExpressao()+ " "+e.isExpressaoValida());
     }
 }

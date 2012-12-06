@@ -5,18 +5,18 @@ public class Pilha {
     private int tamanho;
     private Elemento topo;
 
-    public Pilha(){
+    public Pilha() {
         tamanho = 0;
         topo = null;
     }
-    
-    public void inserir(Object valor) {
+
+    public void empilhar(Object valor) {
         Elemento e = new Elemento(valor, topo);
         topo = e;
         tamanho++;
     }
 
-    public Object remover() throws PilhaVaziaException {
+    public Object desempilhar() throws PilhaVaziaException {
         if (isVazio()) {
             throw new PilhaVaziaException("Pilha vazia");
         } else {
@@ -41,5 +41,20 @@ public class Pilha {
         } else {
             return topo.getValor();
         }
+    }
+
+    @Override
+    public String toString() {
+        String retorno = "";
+        if (!isVazio()) {
+            Elemento e = topo;
+            int i = 1;
+            do {                
+                retorno += "Elemento: " + i + " - " + e.getValor().toString() + "\n";
+                i++;
+                e = e.getProximo();
+            } while (e != null);
+        }
+        return retorno;
     }
 }
