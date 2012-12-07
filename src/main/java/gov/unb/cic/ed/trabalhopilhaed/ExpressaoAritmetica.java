@@ -16,9 +16,45 @@ public class ExpressaoAritmetica {
     }
 
     public int avaliar() throws ProcessadorException {
-        validarNumerico();
-
-        return 0;
+        validarNumerico();        
+        Pilha p = new Pilha();
+        String[] vetor = processaRegex("[0-9]+|.", getPosfixa(false));
+        for(String e : vetor){
+            if(" ".equals(e)){
+                continue;
+            }
+            
+            if(isValorNumerico(e)){
+                p.empilhar(e);
+            }
+            
+            if(isOperador(e)){
+                int valor1, valor2, res = 0;
+                valor1 = Integer.parseInt((String)p.desempilhar());
+                valor2 = Integer.parseInt((String)p.desempilhar());
+                if("+".equals(e)){
+                    res = valor1+valor2;
+                }
+                
+                if("-".equals(e)){
+                    res = valor1-valor2;
+                }
+                
+                if("*".equals(e)){
+                    res = valor1*valor2;
+                }
+                
+                if("/".equals(e)){
+                    res = valor1/valor2;
+                }
+                
+                p.empilhar(Integer.toString(res));
+            }
+        }
+        if(p.getTamanho()>1){
+            throw new ProcessadorException("Erro ao processar expressão: "+getExpressao());
+        }
+        return Integer.parseInt((String)p.getTopo());
 
     }
 
