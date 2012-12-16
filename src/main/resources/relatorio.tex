@@ -1,12 +1,10 @@
 \documentclass[a4paper,11pt]{article}
-%LaTeX Model for Lab reports
-%Tested and used in Mac OS X with MacTEX
-%Felipe Brandão Cavalcanti - LARA, UnB, Brasília, Brazil
 
 %Packages
 \usepackage[brazilian]{babel} %Brazilian Portuguese
 \usepackage[T1]{fontenc}
 \usepackage{subfig}
+\usepackage{color}
 \usepackage[utf8]{inputenc}
 \usepackage{url} %URLs
 \usepackage{makeidx} %Index
@@ -37,7 +35,7 @@
     urlcolor=cyan           % color of external links
 }
 \lstset{ %Sets up lisitings, so we get highlighted code
-language=C,                     % choose the language of the code
+language=Java,                     % choose the language of the code
 basicstyle=\footnotesize,       % the size of the fonts that are used for the code
 numbers=left,                   % where to put the line-numbers
 numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
@@ -75,62 +73,319 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
  
 \textsc{\LARGE Universidade de Brasília}\\[1.5cm]
  
-\textsc{\Large Circuitos Elétricos 2 - Prof. Ícaro dos Santos}\\[0.5cm]
+\textsc{\Large Estrutura de Dados - Turma B - Trabalho I}\\[0.5cm]
  
 % Title
 \HRule \\[0.4cm]
-{ \huge \bfseries Fator de Potência no Brasil}
+{ \huge \bfseries Avaliação de Expressões Aritméticas\\Forma Posfixa}
 \HRule
 \vspace{0.75cm}
-\large Faculdade de Tecnologia\\Departamento de Engenharia Elétrica \\
+\large CIC - Departamento de Ciência da Computação\\
 \vspace{0.8cm}
 % Author and supervisor
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
-\emph{Autor:}\\
-Felipe Brandão Cavalcanti\\
-08/29111
+\emph{Autores:}\\
+Tiago L. P. de Pádua - 12/1042457\\
+Alex Leite\\
+Ronaldo S. Ferreira Jr.\\
 \end{flushleft}
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
-\emph{Orientador:} \\
-Geovany Araújo Borges
+\emph{Professor:} \\
+Eduardo A. P. Alchieri
 \end{flushright}
 \end{minipage}
  
 \vfill
  
 % Bottom of the page
-{\large Agosto de 2008 - Julho de 2009}
+{\large Dezembro de 2012}
 \end{center}
 \end{titlepage}
 
 \pagestyle{plain}
 
 \begin{abstract}
-\( x^2 + y^2 = 1 \) This document focuses on the set-up and basic use of the circuit\_macros package by J. D. Aplevich, enabling the users to embed high-quality circuits into their \LaTeX\ documents. More specifically, this note focuses in the setup in the Mac OS X system, which has became very popular among engineering students in the last few years.
+Este trabalho tem o objetivo de validar, avaliar e transformar da forma infixa para a forma posfixa expressões aritméticas.
 \end{abstract}
 
-\section{Introduction} 
-For many of us, \LaTeX\ is the holy grail of document production - not only does it make our lives easier, it also makes it possible to produce very high quality documents without much effort.
+\section{Introdução} 
+Dada uma expressão aritmética qualquer, inicialmente iremos realizar sua validação, verificando se todos os parênteses abertos na expressão foram devidamente fechados. A seguir, iremos converter a expressão de sua forma infixa para a forma posfixa, conforme exemplo abaixo:\\
+Forma infixa: \(A*B+C-(D/E+F)\)\\
+Forma posfixa: \(A B*C+D E/F+-\)
 
-Yet, \LaTeX\ still has some gaps to fill in - for professionals and students in the field of Electrical Engineering, the necessity of circuit representation has been long filled either with unprofessional and improvised solutions, such as using CAD software to produce the desired representation of the circuit, or reling in proprietary (and often expensive) software to do the same in a rather professional matter.
+Após obtermos a forma posfixa da expressão iremos realizar sua avaliação, isto é, efetuar o cálculo da expressão e exibir seu resultado.
 
-Circuit\_macros basically fills the gap. It gives you all of the benefits (and drawbacks) of \LaTeX\ for circuit representation. Some very professional results can be obtained with a little bit of practice, and combined with the power of \LaTeX\, it can very well be the ultimate solution for electrical engineers looking to produce very high quality documents. More info can be found in J. D. Aplevich's (the creator and maintainer of circuit\_macros), \url{http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/}.
+\section{Implementação}
+A implementação foi realizada utilizando a linguagem de programação Java (javac 1.6.0\_37) através da IDE Netbeans 7.0.1.\\
+As seguintes classes foram criadas:
+\begin{itemize}
+  \item Elemento.java
+  \item Pilha.java
+  \item PilhaVaziaException.java
+  \item ExpressaoAritmetica.java
+  \item ExpressaoGUI.java
+  \item ProcessadorException.java
+\end{itemize}
 
-The idea of this document is to setup the circuit\_macros in the Mac OS X operational system, which is becoming increasingly popular among college students and professionals alike. We assume the basic \LaTeX\ system has been setup, if not, check out the MacTeX distribution (\url{http://www.tug.org/mactex/}). MacTeX is probably the most user-friendly way of getting \LaTeX\ up and running in your mac. This document was written with Mac OS X 10.5 in mind, with circuit\_macros 6.5 and MacTex installed - however, it shouldn't differ much from other configurations.
+\subsection{Elemento.java}
+Classe que serve de base para implementação de uma Pilha, possui somente os campos valor:Object e proximo:Elemento e seus métodos acessores. Como "valor" é do tipo Object, esta implamentação de pilha é genérica e servirá a qualquer tipo de dado.
 
-\section{Installation}
-\subsection{Getting the latest Circuit\_macros package}
-The first step is to grab the latest version of Circuit\_macros. In this example, we will be using version 6.5.
+\subsection{Pilha.java}
+Possui os campos tamanho:int e topo:Elemento, os métodos implementados são os necessários para a utilização da pilha: 
+\begin{itemize}
+  \item public void empilhar(Object valor) ;
+  \item public Object desempilhar() throws PilhaVaziaException;
+  \item public int getTamanho();
+  \item public boolean isVazio();
+  \item public Object getTopo() throws PilhaVaziaException;
+\end{itemize}
 
-The latest version of the circuit\_macros package can be found in the \TeX\ Users Group home page, \url{http://www.tug.org/}, more specifically, at \url{http://www.ctan.org/tex-archive/graphics/circuit_macros/}. You can also grab it directly from the author's website, \url{http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/}. However, keep in mind the the \TeX Users Group homepage should always have the latest official stable version. While you are at it, you might want to grab \verb+dpic+ as well - it can be found in the author's website as well.
+\subsection{PilhaVaziaException.java}
+Exceção criada para identificar o erro de pilha vazia que pode ocorrer ao se tentar desempilhar de uma pilha que não tenha mais elementos.
 
-Once you had the files downloaded, go ahead and unzip them (if the OS hasn't done that already for you). We unzipped our example in the Downloads folder.
+\subsection{ExpressaoAritmetica.java}
+Classe principal do programa, possui o campo expressao:String que deve ser iniciado com a expressão a ser trabalhada, são implementados os seguintes métodos:
 
-\subsection{dpic's installation}
-The installation of circuit\_macros involves quite a bit of command line (terminal), however, most \LaTeX\ users shouldn't have much trouble with it. Also keep in mind that, at least for this tutorial, we have chosen to keep a command line approach, so every time you will need to use to command line to integrate generate the file to be included in your \LaTeX\ document.
+\subsubsection{private boolean possuiCaracteresInvalidosNumericos()}
+Este método retorna \(true\) caso caso a expressão aritmética numérica informada na classe possua caracteres estranhos à uma expressão aritmética numérica válida, para isso, utilizou-se uma expressão regular. 
 
-Our first step is to install \verb+dpic+, which is one of the necessary programs for circuit\_macros. For information on it, check out documentation on both \verb+dpic+ and circuit\_macros.
+\subsubsection{private boolean possuiCaracteresInvalidosVariaveis()}
+Este método retorna \(true\) caso caso a expressão aritmética sob forma de variáveis (\(A+B*C\)) informada na classe possua caracteres estranhos à uma expressão válida, para isso, utilizou-se uma expressão regular. 
+
+\subsubsection{public int avaliar() throws ProcessadorException}
+Dada uma expressão aritmética numérida válida, este método retorna o valor resultante da expressão,  \emph{representa o requisito 3.4 do trabalho}.
+
+\subsubsection{public void validarVariavel() throws ProcessadorException}
+Valida uma expressão aritmética formada por variáveis.
+
+\subsubsection{public void validarNumerico() throws ProcessadorException}
+Valida uma expressão aritmética numérica.
+
+\subsubsection{public static int getPrioridade(String operador) throws ProcessadorException}
+Retorna a prioridade do operador aritmético informado.
+
+\subsubsection{public static boolean isParenteses(String s)}
+Retorna \(true\) caso o caracter informado seja um parêntese.
+
+\subsubsection{public static boolean isOperador(String s)}
+Retorna \(true\) caso o caracter informado seja um operador aritmético válido.
+
+\subsubsection{public String getPosfixa(boolean comVariaveis) throws ProcessadorException}
+Retorna a expressão aritmética dada para sua forma posfixa, \emph{representa o requisito 3.3 do trabalho}.
+
+\subsubsection{public String getExpressao()}
+Retorna a expressão infixa associada ao objeto.
+
+\subsubsection{public void setExpressao(String expressao) }
+Atribui ao objeto a expressão aritmética infixa a ser trabalhada.
+
+\subsubsection{public static boolean isValorVariavel(String s)}
+Verifica se o caracter apresentado representa uma variável, ou seja, uma letra do conjunto [A-Z].
+
+\subsubsection{public boolean isExpressaoValida()}
+Retorna \(true\) caso os parênteses da expressão dada estejam corretamente aninhados e balanceados, \emph{representa o requisito 3.2 do trabalho}.
+
+
+\subsubsection{public String[] getVetorNumerico()}
+Transforma a expressão aritmética numérica infixa em um vetor de Strings que representam cada componente da expressão.
+
+\subsubsection{public String[] getVetorVariavel()}
+Transforma a expressão aritmética com variáveis infixa em um vetor de Strings que representam cada componente da expressão.
+
+\subsubsection{public String[] getParenteses()}
+Retorna um vetor de Strings contendo todos os parenteses da expressão.
+
+\subsubsection{public static String[] processaRegex(String regex, String s)}
+Método utilitário usado para converter uma String em um vetor de Strings utilizando uma expressão regular.
+
+\subsection{ExpressaoGUI.java}
+Classe que representa a interface gráfica (GUI - Graphical User Interface), utilizada pelo usuário na execução do programa.
+
+\subsection{ProcessadorException.java}
+Exceção criada para identificar erros que decorrem do processamento da expressão aritmética.
+
+\section{Estudo de Complexidade}
+Realizaremos o estudo da complexidade dos métodos apresentados como requisitos para o trabalho, são eles:
+
+\subsection{public boolean isExpressaoValida()}
+\begin{lstlisting}
+    public boolean isExpressaoValida() {
+        Pilha p = new Pilha();
+        String[] vetor = getParenteses();
+        for (String e : vetor) {
+            if ("(".equals(e)) {
+                p.empilhar(e);
+            } else {
+                try {
+                    p.desempilhar();
+                } catch (PilhaVaziaException ex) {
+                    return false;
+                }
+            }
+        }
+        return p.isVazio();
+    }
+\end{lstlisting}
+Estudo da complexidade linha a linha:
+\begin{itemize}
+  \item Linha 2 - 1
+  \item Linha 3 - 1
+  \item Linha 4 - n
+  \item Linha 5 - n
+  \item Linha 6 - n/2
+  \item Linha 7 - n/2
+  \item Linha 15 - 1
+\end{itemize}
+Ao final teremos \(3n+3\), ou seja \(O(n)=n\).
+
+\subsection{public String getPosfixa(boolean comVariaveis) throws ProcessadorException}
+\begin{lstlisting}
+    public String getPosfixa(boolean comVariaveis) throws ProcessadorException {        
+        String[] vetor;       
+        if(comVariaveis){
+            validarVariavel();
+            vetor = getVetorVariavel();
+        }else{
+            validarNumerico();
+            vetor = getVetorNumerico();
+        }       
+        String resposta = "";
+        Pilha pilha = new Pilha();       
+        for (String e : vetor) {
+            if (!comVariaveis && isValorNumerico(e)) {
+                resposta += " " + e;
+            }          
+            if (comVariaveis && isValorVariavel(e)) {
+                resposta += " " + e;
+            }
+            if (isOperador(e)) {
+                while (!pilha.isVazio() && !isParenteses((String) pilha.getTopo()) && !(getPrioridade(e) > getPrioridade((String) pilha.getTopo()))) {
+                    resposta += " " + pilha.desempilhar();
+                }
+                pilha.empilhar(e);
+            }
+            if (isParenteses(e)) {
+                if ("(".equals(e)) {
+                    pilha.empilhar(e);
+                } else if (")".equals(e)) {
+                    while (!"(".equals(pilha.getTopo())) {
+                        resposta += " " + pilha.desempilhar();
+                    }
+                    pilha.desempilhar();
+                }
+            }
+        }
+        while (!pilha.isVazio()) {
+            resposta += " " + pilha.desempilhar();
+        }      
+        resposta = resposta.trim();
+        return resposta;
+    }
+\end{lstlisting}
+Podemos verificar que existe apenas uma estrutura de repedição no código sem aninhamentos internos de outras estruturas de repetição, assim, concluímos que a complexidade do algoritmo é dada por \(O(n)=n\).
+
+\subsection{public int avaliar() throws ProcessadorException}
+\begin{lstlisting}
+    public int avaliar() throws ProcessadorException {
+        validarNumerico();        
+        Pilha p = new Pilha();
+        String[] vetor = processaRegex("[0-9]+|.", getPosfixa(false));
+        for(String e : vetor){
+            if(" ".equals(e)){
+                continue;
+            }            
+            if(isValorNumerico(e)){
+                p.empilhar(e);
+            }            
+            if(isOperador(e)){
+                int valor1, valor2, res = 0;
+                valor1 = Integer.parseInt((String)p.desempilhar());
+                valor2 = Integer.parseInt((String)p.desempilhar());
+                if("+".equals(e)){
+                    res = valor1+valor2;
+                }                
+                if("-".equals(e)){
+                    res = valor1-valor2;
+                }                
+                if("*".equals(e)){
+                    res = valor1*valor2;
+                }                
+                if("/".equals(e)){
+                    res = valor1/valor2;
+                }              
+                p.empilhar(Integer.toString(res));
+            }
+        }
+        if(p.getTamanho()>1){
+            throw new ProcessadorException("Erro ao processar expressao: " + getExpressao());
+        }
+        return Integer.parseInt((String)p.getTopo());
+    }
+\end{lstlisting}
+Podemos verificar que existe apenas uma estrutura de repedição no código sem aninhamentos internos de outras estruturas de repetição, assim, concluímos que a complexidade do algoritmo é dada por \(O(n)=n\).
+
+\section{Listagem de testes executados}
+Para a realização dos testes, criamos a classe TesteExpressaoAritmetica.java e realizamos os testes conforme abaixo, todos foram bem sucedidos:
+\begin{lstlisting}
+package gov.unb.cic.ed.trabalhopilhaed;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+public class TesteExpressaoAritmetica
+        extends TestCase {
+
+    public TesteExpressaoAritmetica(String testName) {
+        super(testName);
+    }
+
+    public static Test suite() {
+        return new TestSuite(TesteExpressaoAritmetica.class);
+    }
+
+    public void testExpressoes() throws ProcessadorException {
+        //  Infixa                          Posfixa
+        //1 (A+B*C)                         A B C * +
+        //2 (A*(B+C)/D-E)                   A B C + * D / E -
+        //3 (A+B*(C-D*(E-F)-G*H)-I*3)       A B C D E F - * - G H * - * + I 3 * -
+        //4 (A+B*C/D*E-F)                   A B C * D / E * + F -
+        //5 (A+(B-(C+(D-(E+F)))))           A B C D E F + - + - +
+        //6 (A*(B+(C*(D+(E*(F+G))))))       A B C D E F G + * + * + *
+        ExpressaoAritmetica e = new ExpressaoAritmetica();
+        
+        //1
+        e.setExpressao("(A+B*C)");
+        assertEquals("A B C * +", e.getPosfixa(true));
+        
+        //2
+        e.setExpressao("(A*(B+C)/D-E)");
+        assertEquals("A B C + * D / E -", e.getPosfixa(true));
+        
+        //3
+        e.setExpressao("(A+B*(C-D*(E-F)-G*H)-I*J)");
+        assertEquals("A B C D E F - * - G H * - * + I J * -", e.getPosfixa(true));
+        
+        //4
+        e.setExpressao("(A+B*C/D*E-F)");
+        assertEquals("A B C * D / E * + F -", e.getPosfixa(true));
+        
+        //5
+        e.setExpressao("(A+(B-(C+(D-(E+F)))))");
+        assertEquals("A B C D E F + - + - +", e.getPosfixa(true));
+        
+        //6
+        e.setExpressao("(A*(B+(C*(D+(E*(F+G))))))");
+        assertEquals("A B C D E F G + * + * + *", e.getPosfixa(true));                
+        
+    }
+}
+
+\end{lstlisting}
+
+\section{Conclusão}
+Após o término do trabalho pudemos concluir que a utilização de pilhas é recomendável quando da necessidade de algoritmos para processar expressões aritméticas, realizando a conversão de sua forma infixa para posfixa e avaliando seu resultado.
 \end{document}

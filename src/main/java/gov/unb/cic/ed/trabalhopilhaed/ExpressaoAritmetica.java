@@ -15,6 +15,7 @@ public class ExpressaoAritmetica {
         return !expressao.matches("([A-Z]|[(|)|+|\\-|*|/])+$");
     }
 
+    //Item 3.4 do trabalho
     public int avaliar() throws ProcessadorException {
         validarNumerico();        
         Pilha p = new Pilha();
@@ -110,6 +111,7 @@ public class ExpressaoAritmetica {
 
     //Caso seja passado comVariaveis = true, aceita expressoes do tipo A+B, caso
     //contrário, somente expressões numéricas do tipo 1+2
+    //Item 3.3 do trabalho
     public String getPosfixa(boolean comVariaveis) throws ProcessadorException {        
         String[] vetor;
         
@@ -142,7 +144,6 @@ public class ExpressaoAritmetica {
 
             if (isParenteses(e)) {
                 if ("(".equals(e)) {
-                    //resposta += " " + pilha.desempilhar();
                     pilha.empilhar(e);
                 } else if (")".equals(e)) {
                     while (!"(".equals(pilha.getTopo())) {
@@ -188,7 +189,7 @@ public class ExpressaoAritmetica {
         return s.matches("[A-Z]+");        
     }
 
-    //Ítem 3.2 do trabalho
+    //Item 3.2 do trabalho
     public boolean isExpressaoValida() {
         Pilha p = new Pilha();
         String[] vetor = getParenteses();

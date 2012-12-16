@@ -106,34 +106,35 @@ public class ExpressaoGUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 450));
         setResizable(false);
         getContentPane().setLayout(null);
 
         txtExpressao.setText("?????????");
         getContentPane().add(txtExpressao);
-        txtExpressao.setBounds(186, 252, 308, 28);
+        txtExpressao.setBounds(190, 290, 308, 28);
 
-        jLabel1.setText("Notação Pós-fixa:");
+        jLabel1.setText("Notação posfixa:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 289, 152, 14);
+        jLabel1.setBounds(20, 330, 152, 14);
 
         lblPosfixa.setText("????????????????????");
         getContentPane().add(lblPosfixa);
-        lblPosfixa.setBounds(186, 288, 308, 16);
+        lblPosfixa.setBounds(190, 330, 308, 16);
 
         jLabel7.setText("Valor:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 318, 36, 16);
+        jLabel7.setBounds(20, 360, 36, 16);
 
         lblResultado.setText("??????????");
         getContentPane().add(lblResultado);
-        lblResultado.setBounds(186, 318, 300, 16);
+        lblResultado.setBounds(190, 360, 300, 16);
 
         jLabel2.setText("Expressão:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 258, 68, 16);
+        jLabel2.setBounds(20, 300, 68, 16);
 
-        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13));
         jLabel3.setText("Universidade de Brasília - Instituto de Ciências Exatas");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(111, 8, 365, 16);
