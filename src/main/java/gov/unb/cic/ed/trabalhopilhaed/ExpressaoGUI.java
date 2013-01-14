@@ -106,7 +106,7 @@ public class ExpressaoGUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 450));
+        setMinimumSize(new java.awt.Dimension(640, 480));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -167,13 +167,13 @@ public class ExpressaoGUI extends javax.swing.JFrame {
         getContentPane().add(jLabel11);
         jLabel11.setBounds(269, 152, 48, 16);
 
-        jLabel12.setText("Alex Leite");
+        jLabel12.setText("Alex Leite - 05/97694");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(262, 194, 62, 16);
+        jLabel12.setBounds(220, 200, 150, 16);
 
-        jLabel13.setText("Ronaldo S. Ferreira Jr.");
+        jLabel13.setText("Ronaldo S. Ferreira Jr. 09/487121");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(226, 218, 134, 16);
+        jLabel13.setBounds(190, 230, 220, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
