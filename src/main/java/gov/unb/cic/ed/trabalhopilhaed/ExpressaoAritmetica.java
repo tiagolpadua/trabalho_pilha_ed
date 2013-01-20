@@ -34,19 +34,19 @@ public class ExpressaoAritmetica {
                 valor1 = Integer.parseInt((String)p.desempilhar());
                 valor2 = Integer.parseInt((String)p.desempilhar());
                 if("+".equals(e)){
-                    res = valor1+valor2;
+                    res = valor2+valor1;
                 }
                 
                 if("-".equals(e)){
-                    res = valor1-valor2;
+                    res = valor2-valor1;
                 }
                 
                 if("*".equals(e)){
-                    res = valor1*valor2;
+                    res = valor2*valor1;
                 }
                 
                 if("/".equals(e)){
-                    res = valor1/valor2;
+                    res = valor2/valor1;
                 }
                 
                 p.empilhar(Integer.toString(res));
