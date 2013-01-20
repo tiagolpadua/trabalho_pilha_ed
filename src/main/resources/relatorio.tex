@@ -87,8 +87,8 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \begin{flushleft} \large
 \emph{Autores:}\\
 Tiago L. P. de Pádua - 12/1042457\\
-Alex Leite\\
-Ronaldo S. Ferreira Jr.\\
+Ronaldo S. Ferreira Jr. - 09/48721\\
+Alex Leite - 05/97694\\
 \end{flushleft}
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
@@ -107,19 +107,33 @@ Eduardo A. P. Alchieri
 
 \pagestyle{plain}
 
-\begin{abstract}
-Este trabalho tem o objetivo de validar, avaliar e transformar da forma infixa para a forma posfixa expressões aritméticas.
-\end{abstract}
+%\begin{abstract}
+%Através do estudo de estrututa de dados, este trabalho tem o objetivo a confecção de um projeto, onde deverá ser feito um $software$ capaz de de validar, avaliar e realizar a conversão de uma expressão aritmética escrita em forma infixa para a forma posfixa.
+%\end{abstract}
 
 \section{Introdução} 
-Dada uma expressão aritmética qualquer, inicialmente iremos realizar sua validação, verificando se todos os parênteses abertos na expressão foram devidamente fechados. A seguir, iremos converter a expressão de sua forma infixa para a forma posfixa, conforme exemplo abaixo:\\
-Forma infixa: \(A*B+C-(D/E+F)\)\\
+Através do estudo de estrututa de dados, este trabalho tem o objetivo a confecção de um projeto, onde deverá ser feito um $software$ capaz de de validar, avaliar e realizar a conversão de uma expressão aritmética escrita em forma infixa para a forma posfixa.
+
+Dada uma expressão aritmética qualquer, inicialmente iremos realizar sua validação, verificando se todos os parênteses abertos na expressão foram devidamente fechados, ou seja, procurando por leves inconsistencias na expressão aritmética. 
+A seguir, iremos converter a expressão de sua forma infixa para a forma posfixa, conforme exemplo abaixo:
+
+Exemplo I:
+
+Forma infixa: \(A*B+C-(D/E+F)\)
+
 Forma posfixa: \(A B*C+D E/F+-\)
 
-Após obtermos a forma posfixa da expressão iremos realizar sua avaliação, isto é, efetuar o cálculo da expressão e exibir seu resultado.
+Exemplo II:
+
+Forma infixa: \(10*5+6-(8/2+7)\)
+
+Forma posfixa: \(10\ 5* 6+ 8 2/7 +-\)
+
+Após obtermos a forma posfixa da expressão iremos realizar sua avaliação, isto é, efetuar o cálculo da expressão e exibir seu resultado, caso a entrada de parâmetros seja numérica.
 
 \section{Implementação}
-A implementação foi realizada utilizando a linguagem de programação Java (javac 1.6.0\_37) através da IDE Netbeans 7.0.1.\\
+A implementação do código foi realizada utilizando a linguagem de programação Java (javac 1.6.0\_37) através da plataforma de desenvolvimento Netbeans 7.0.1.\\
+
 As seguintes classes foram criadas:
 \begin{itemize}
   \item Elemento.java
@@ -131,84 +145,85 @@ As seguintes classes foram criadas:
 \end{itemize}
 
 \subsection{Elemento.java}
-Classe que serve de base para implementação de uma Pilha, possui somente os campos valor:Object e proximo:Elemento e seus métodos acessores. Como "valor" é do tipo Object, esta implamentação de pilha é genérica e servirá a qualquer tipo de dado.
+Classe que serve de base para implementação de uma Pilha, possui somente os campos valor:Object e proximo:Elemento e seus métodos auxiliares. Como "valor" é do tipo Object, esta implamentação de pilha é genérica e servirá a qualquer tipo de dados.
+A classe Elemento carrega os objetos contidos em uma Pilha.
 
 \subsection{Pilha.java}
-Possui os campos tamanho:int e topo:Elemento, os métodos implementados são os necessários para a utilização da pilha: 
+Possui os campos tamanho:int, que contém o tamanho corrente da pilha e, topo:Elemento, onde está indicado o elemento localizado no topo da Pilha. Os métodos implementados são os necessários para a utilização da pilha: 
 \begin{itemize}
-  \item public void empilhar(Object valor) ;
-  \item public Object desempilhar() throws PilhaVaziaException;
-  \item public int getTamanho();
-  \item public boolean isVazio();
-  \item public Object getTopo() throws PilhaVaziaException;
+  \item public void empilhar(Object valor);\\
+Para empilhar elementos na Pilha (operação $push$).
+  \item public Object desempilhar(\ ) throws PilhaVaziaException;\\Para desempilhar elementos da Pilha (operação $pop$), caso a Pilha esteja vazia, uma mensagem de erro é lançada ao sistema.
+  \item public int getTamanho(\ );\\Exibe o tamanho da Pilha.
+  \item public boolean isVazio(\ );\\Checa se a Pilha está vazia.
+  \item public Object getTopo(\ ) throws PilhaVaziaException;\\Lê o objeto no topo da Pilha.
 \end{itemize}
 
 \subsection{PilhaVaziaException.java}
-Exceção criada para identificar o erro de pilha vazia que pode ocorrer ao se tentar desempilhar de uma pilha que não tenha mais elementos.
+Classe criada para identificar a mensagem de erro lançada, caso tente-se desempilhar uma Pilha vazia.
 
 \subsection{ExpressaoAritmetica.java}
 Classe principal do programa, possui o campo expressao:String que deve ser iniciado com a expressão a ser trabalhada, são implementados os seguintes métodos:
 
-\subsubsection{private boolean possuiCaracteresInvalidosNumericos()}
-Este método retorna \(true\) caso caso a expressão aritmética numérica informada na classe possua caracteres estranhos à uma expressão aritmética numérica válida, para isso, utilizou-se uma expressão regular. 
+\subsubsection{private boolean possuiCaracteresInvalidosNumericos(\ )}
+Este método retorna  \emph{$true$}, caso a expressão aritmética numérica informada na classe possua caracteres estranhos à uma expressão aritmética numérica válida, para isso, utilizou-se uma expressão regular. 
 
-\subsubsection{private boolean possuiCaracteresInvalidosVariaveis()}
-Este método retorna \(true\) caso caso a expressão aritmética sob forma de variáveis (\(A+B*C\)) informada na classe possua caracteres estranhos à uma expressão válida, para isso, utilizou-se uma expressão regular. 
+\subsubsection{private boolean possuiCaracteresInvalidosVariaveis(\ )}
+Este método retorna \emph{$true$} caso a expressão algébrica sob forma de variáveis (\(A+B*C\)) informada na classe possua caracteres estranhos à uma expressão válida, para isso, utilizou-se uma expressão regular. 
 
-\subsubsection{public int avaliar() throws ProcessadorException}
+\subsubsection{public int avaliar(\ ) throws ProcessadorException}
 Dada uma expressão aritmética numérida válida, este método retorna o valor resultante da expressão,  \emph{representa o requisito 3.4 do trabalho}.
 
-\subsubsection{public void validarVariavel() throws ProcessadorException}
-Valida uma expressão aritmética formada por variáveis.
+\subsubsection{public void validarVariavel(\ ) throws ProcessadorException}
+Valida uma expressão algébrica formada por variáveis simbólicas.
 
-\subsubsection{public void validarNumerico() throws ProcessadorException}
-Valida uma expressão aritmética numérica.
+\subsubsection{public void validarNumerico(\ ) throws ProcessadorException}
+Valida uma expressão aritmética formada por valores numéricos.
 
 \subsubsection{public static int getPrioridade(String operador) throws ProcessadorException}
-Retorna a prioridade do operador aritmético informado.
+Retorna a prioridade do operador aritmético informado (multiplicação, divisão, soma, subtração).
 
 \subsubsection{public static boolean isParenteses(String s)}
-Retorna \(true\) caso o caracter informado seja um parêntese.
+Retorna \emph{$true$} caso o caractere informado seja um parêntese.
 
 \subsubsection{public static boolean isOperador(String s)}
-Retorna \(true\) caso o caracter informado seja um operador aritmético válido.
+Retorna \emph{$true$} caso o caractere informado seja um operador aritmético válido (+, -, *, /).
 
 \subsubsection{public String getPosfixa(boolean comVariaveis) throws ProcessadorException}
 Retorna a expressão aritmética dada para sua forma posfixa, \emph{representa o requisito 3.3 do trabalho}.
 
-\subsubsection{public String getExpressao()}
+\subsubsection{public String getExpressao(\ )}
 Retorna a expressão infixa associada ao objeto.
 
 \subsubsection{public void setExpressao(String expressao) }
 Atribui ao objeto a expressão aritmética infixa a ser trabalhada.
 
 \subsubsection{public static boolean isValorVariavel(String s)}
-Verifica se o caracter apresentado representa uma variável, ou seja, uma letra do conjunto [A-Z].
+Verifica se o caractere apresentado representa uma variável simbólica, ou seja, uma letra do conjunto [A-Z].
 
-\subsubsection{public boolean isExpressaoValida()}
-Retorna \(true\) caso os parênteses da expressão dada estejam corretamente aninhados e balanceados, \emph{representa o requisito 3.2 do trabalho}.
+\subsubsection{public boolean isExpressaoValida(\ )}
+Retorna \emph{$true$} caso os parênteses da expressão dada estejam corretamente aninhados e balanceados, \emph{representa o requisito 3.2 do trabalho}.
 
-
-\subsubsection{public String[] getVetorNumerico()}
+\subsubsection{public String[\ ] getVetorNumerico(\ )}
 Transforma a expressão aritmética numérica infixa em um vetor de Strings que representam cada componente da expressão.
 
-\subsubsection{public String[] getVetorVariavel()}
-Transforma a expressão aritmética com variáveis infixa em um vetor de Strings que representam cada componente da expressão.
+\subsubsection{public String[\ ] getVetorVariavel(\ )}
+Transforma a expressão aritmética com variáveis simbólicas infixa em um vetor de Strings que representam cada componente da expressão.
 
-\subsubsection{public String[] getParenteses()}
+\subsubsection{public String[\ ] getParenteses(\ )}
 Retorna um vetor de Strings contendo todos os parenteses da expressão.
 
-\subsubsection{public static String[] processaRegex(String regex, String s)}
+\subsubsection{public static String[\ ] processaRegex(String regex, String s)}
 Método utilitário usado para converter uma String em um vetor de Strings utilizando uma expressão regular.
 
 \subsection{ExpressaoGUI.java}
-Classe que representa a interface gráfica (GUI - Graphical User Interface), utilizada pelo usuário na execução do programa.
+Classe que representa a interface gráfica (GUI - $Graphical$ $User$ $Interface$), utilizada pelo usuário na execução do programa.
 
 \subsection{ProcessadorException.java}
 Exceção criada para identificar erros que decorrem do processamento da expressão aritmética.
 
 \section{Estudo de Complexidade}
-Realizaremos o estudo da complexidade dos métodos apresentados como requisitos para o trabalho, são eles:
+Um estudo acerca da complexidade dos métodos apresentado foi realizado, como requisitos para o trabalho, são eles:
 
 \subsection{public boolean isExpressaoValida()}
 \begin{lstlisting}
@@ -240,6 +255,8 @@ Estudo da complexidade linha a linha:
   \item Linha 15 - 1
 \end{itemize}
 Ao final teremos \(3n+3\), ou seja \(O(n)=n\).
+
+Ou seja, a curva $O(n)$ apresenta um crescimento linear, que varia de acordo com $n$ (a quantidade de elementos da pilha).
 
 \subsection{public String getPosfixa(boolean comVariaveis) throws ProcessadorException}
 \begin{lstlisting}
@@ -285,7 +302,7 @@ Ao final teremos \(3n+3\), ou seja \(O(n)=n\).
         return resposta;
     }
 \end{lstlisting}
-Podemos verificar que existe apenas uma estrutura de repedição no código sem aninhamentos internos de outras estruturas de repetição, assim, concluímos que a complexidade do algoritmo é dada por \(O(n)=n\).
+Pode-se verificar que existe apenas uma estrutura de repetição no código, sem aninhamentos internos de outras estruturas de repetição, assim, conclui-se que a complexidade do algoritmo é dada, também, por \(O(n)=n\).
 
 \subsection{public int avaliar() throws ProcessadorException}
 \begin{lstlisting}
@@ -325,10 +342,10 @@ Podemos verificar que existe apenas uma estrutura de repedição no código sem 
         return Integer.parseInt((String)p.getTopo());
     }
 \end{lstlisting}
-Podemos verificar que existe apenas uma estrutura de repedição no código sem aninhamentos internos de outras estruturas de repetição, assim, concluímos que a complexidade do algoritmo é dada por \(O(n)=n\).
+Aqui também pode-se verificar que existe apenas uma estrutura de repetição no código, sem aninhamentos internos de outras estruturas de repetição, assim, conclui-se que, novamente, a complexidade do algoritmo é dada por \(O(n)=n\).
 
 \section{Listagem de testes executados}
-Para a realização dos testes, criamos a classe TesteExpressaoAritmetica.java e realizamos os testes conforme abaixo, todos foram bem sucedidos:
+Para a realização dos testes, foir criada a classe TesteExpressaoAritmetica.java e foram realizados os testes conforme consta abaixo:
 \begin{lstlisting}
 package gov.unb.cic.ed.trabalhopilhaed;
 
@@ -384,10 +401,12 @@ public class TesteExpressaoAritmetica
     }
 }
 
-\end{lstlisting}
 
+\end{lstlisting}
+Após a realização dos testes, foi verificado que todos foram bem sucedidos. 
 \section{Conclusão}
-Após o término do trabalho pudemos concluir que a utilização de pilhas é recomendável quando da necessidade de algoritmos para processar expressões aritméticas, realizando a conversão de sua forma infixa para posfixa e avaliando seu resultado.
+Pode-se concluir que a utilização de pilhas é recomendável quando da necessidade de algoritmos para processar expressões aritméticas, realizando a conversão de sua forma infixa para posfixa e avaliando seu resultado. Como já ocorre em inúmeras calculadoras gráficas e científicas, tendo em vista, que a forma posfixa, e suas derivadas, de uma expressão separa elemento a elemento de uma maneira mais eficiente computacionalmente.
+
 \nocite{*}					%Imprime toda a bibliografia
 \bibliography{bibliografia}		
 \bibliographystyle{plain}		
