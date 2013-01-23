@@ -32,22 +32,32 @@ public class TesteExpressaoAritmetica
         //2
         e.setExpressao("(A*(B+C)/D-E)");
         assertEquals("A B C + * D / E -", e.getPosfixa(true));
+        e.setExpressao("(100*(200+300)/400-500)");
+        assertEquals(-375, e.avaliar());
         
         //3
         e.setExpressao("(A+B*(C-D*(E-F)-G*H)-I*J)");
         assertEquals("A B C D E F - * - G H * - * + I J * -", e.getPosfixa(true));
+        e.setExpressao("(100+200*(300-400*(500-600)-700*800)-900*1000)");
+        assertEquals(-104839900, e.avaliar());
         
         //4
         e.setExpressao("(A+B*C/D*E-F)");
         assertEquals("A B C * D / E * + F -", e.getPosfixa(true));
+        e.setExpressao("(100+200*300/400*500-600)");
+        assertEquals(74500, e.avaliar());
         
         //5
         e.setExpressao("(A+(B-(C+(D-(E+F)))))");
         assertEquals("A B C D E F + - + - +", e.getPosfixa(true));
+        e.setExpressao("(100+(200-(300+(400-(500+600)))))");
+        assertEquals(700, e.avaliar());
         
         //6
         e.setExpressao("(A*(B+(C*(D+(E*(F+G))))))");
         assertEquals("A B C D E F G + * + * + *", e.getPosfixa(true));                
+        e.setExpressao("(1*(2-(3*(4+(5*(6+7))))))");
+        assertEquals(-205, e.avaliar());
         
     }
 }

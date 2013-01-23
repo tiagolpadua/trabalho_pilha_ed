@@ -365,8 +365,14 @@ Ao final teremos \(18n+6\), ou seja \(O(n)=n\).
 Ou seja, a curva $O(n)$ apresenta um crescimento linear, que varia de acordo com $n$ (a quantidade de elementos da pilha).
 
 \section{Listagem de testes executados}
-Para a realização dos testes, foi criada a classe TesteExpressaoAritmetica.java e foram realizados os testes conforme consta abaixo:
+Para a realização dos testes, foir criada a classe TesteExpressaoAritmetica.java e foram realizados os testes conforme consta abaixo:
 \begin{lstlisting}
+package gov.unb.cic.ed.trabalhopilhaed;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 public class TesteExpressaoAritmetica
         extends TestCase {
 
@@ -395,32 +401,22 @@ public class TesteExpressaoAritmetica
         //2
         e.setExpressao("(A*(B+C)/D-E)");
         assertEquals("A B C + * D / E -", e.getPosfixa(true));
-        e.setExpressao("(100*(200+300)/400-500)");
-        assertEquals(-375, e.avaliar());
         
         //3
         e.setExpressao("(A+B*(C-D*(E-F)-G*H)-I*J)");
         assertEquals("A B C D E F - * - G H * - * + I J * -", e.getPosfixa(true));
-        e.setExpressao("(100+200*(300-400*(500-600)-700*800)-900*1000)");
-        assertEquals(-104839900, e.avaliar());
         
         //4
         e.setExpressao("(A+B*C/D*E-F)");
         assertEquals("A B C * D / E * + F -", e.getPosfixa(true));
-        e.setExpressao("(100+200*300/400*500-600)");
-        assertEquals(74500, e.avaliar());
         
         //5
         e.setExpressao("(A+(B-(C+(D-(E+F)))))");
         assertEquals("A B C D E F + - + - +", e.getPosfixa(true));
-        e.setExpressao("(100+(200-(300+(400-(500+600)))))");
-        assertEquals(700, e.avaliar());
         
         //6
         e.setExpressao("(A*(B+(C*(D+(E*(F+G))))))");
         assertEquals("A B C D E F G + * + * + *", e.getPosfixa(true));                
-        e.setExpressao("(1*(2-(3*(4+(5*(6+7))))))");
-        assertEquals(-205, e.avaliar());
         
     }
 }
